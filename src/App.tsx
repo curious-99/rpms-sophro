@@ -14,71 +14,35 @@ import LoginviaOTP from './pages/Login/LoginviaOTP';
 import DashboardLayout from './components/layout/DashboardLayout';
 import DashboardHome from './pages/Dashboard';
 import PatientsTableExample from './pages/Patients/PatientsExample';
-import { UserRole } from './types/auth';
-
-// Protected Route component
-const ProtectedRoute = ({ children, allowedRoles }: { children: React.ReactNode; allowedRoles: UserRole[] }) => {
-  const location = useLocation();
-  // TODO: Replace with actual auth check
-  const userRole = 'DOCTOR'; // This should come from your auth context/state
-
-  if (!allowedRoles.includes(userRole as UserRole)) {
-    return <Navigate to="/login" state={{ from: location }} replace />;
-  }
-
-  return <>{children}</>;
-};
+import NotificationsPanel from './pages/Notifications/Notifications';
 
 function AppContent() {
   return (
     <Routes>
-      {/* Public Routes */}
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/" element={<Navigate to="/login" replace />} />
 
       {/* Forgot Password Routes */}
       <Route path="/forgot-password" element={<ForgotPassword />} />
-      <Route path="/forgot-password/update-password" element={<UpdatePassword />} />
-      <Route path="/forgot-password/password-updated" element={<PasswordUpdated />} />
+      <Route
+        path="/forgot-password/update-password"
+        element={<UpdatePassword />}
+      />
+      <Route
+        path="/forgot-password/password-updated"
+        element={<PasswordUpdated />}
+      />
+
+      {/* Login via OTP Route */}
       <Route path="/login-otp" element={<LoginviaOTP />} />
 
-      {/* Protected Routes */}
-      <Route path="/doctor" element={
-        <ProtectedRoute allowedRoles={['DOCTOR']}>
-          <DashboardLayout />
-        </ProtectedRoute>
-      }>
-        <Route index element={<PatientsTableExample />} />
-        <Route path="patients/:patientId" element={<DashboardHome />} />
-        <Route path="notifications" element={<PatientsTableExample />} />
-      </Route>
-
-      <Route path="/patient" element={
-        <ProtectedRoute allowedRoles={['PATIENT']}>
-          <DashboardLayout />
-        </ProtectedRoute>
-      }>
+      {/* Dashboard Routes (using the DashboardLayout) */}
+      <Route path="/dashboard" element={<DashboardLayout />}>
         <Route index element={<DashboardHome />} />
-        <Route path="profile" element={<div>Patient Profile</div>} />
-      </Route>
-
-      <Route path="/caretaker" element={
-        <ProtectedRoute allowedRoles={['CARETAKER']}>
-          <DashboardLayout />
-        </ProtectedRoute>
-      }>
-        <Route index element={<DashboardHome />} />
-        <Route path="profile" element={<div>CareTaker Profile</div>} />
-      </Route>
-
-      <Route path="/admin" element={
-        <ProtectedRoute allowedRoles={['ADMIN']}>
-          <DashboardLayout />
-        </ProtectedRoute>
-      }>
-        <Route index element={<div>Admin Dashboard</div>} />
-        <Route path="users" element={<div>User Management</div>} />
+        <Route path="patients" element={<PatientsTableExample />} />
+        <Route path="notifications" element={<NotificationsPanel />} />
+        {/* Add other nested routes as needed */}
       </Route>
     </Routes>
   );

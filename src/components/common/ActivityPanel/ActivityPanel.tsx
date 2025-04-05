@@ -45,7 +45,7 @@ const ActivityPanel: React.FC<ActivityPanelProps> = ({ metric, selectedRange }) 
 
   return (
     <>
-      <div className="rounded-lg bg-white shadow-[0px_0px_10px_rgba(0,0,0,0.05)] border border-gray-100 py-5 px-4">
+      <div className="rounded-lg bg-white shadow-[0px_0px_10px_rgba(0,0,0,0.05)] border border-gray-100 py-4 px-4">
         <div className="flex justify-between items-center mb-2">
           <div className="flex items-center">
            <img src={metric.icon} alt={`${metric.title} icon`} className="w-7 h-7 mr-2" />
@@ -59,7 +59,7 @@ const ActivityPanel: React.FC<ActivityPanelProps> = ({ metric, selectedRange }) 
           </button>
         </div>
 
-        <div className="flex flex-row gap-4">
+        <div className="flex flex-row gap-2">
           <div className="flex-1">
             <ActivityBarChart 
               data={chartData} 
@@ -68,11 +68,11 @@ const ActivityPanel: React.FC<ActivityPanelProps> = ({ metric, selectedRange }) 
             />
           </div>
 
-          <div className="flex flex-col gap-2 min-w-[100px]">
+          <div className="flex flex-col gap-2">
             {stats.map((stat, idx) => (
               <div
                 key={idx}
-                className="rounded-lg bg-[#CCFBF1] border border-[#b8e6d9] p-3 text-center"
+                className="rounded-lg bg-[#CCFBF1] border border-[#b8e6d9] px-3 py-2 text-center"
                 style={{
                   boxShadow:
                     '1px 1px 4px 0px rgba(0,0,0,0.25) inset, 1px 1px 4px 0px rgba(0,0,0,0.25)',

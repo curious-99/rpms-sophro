@@ -114,12 +114,12 @@ export function CustomReactTable<TData, TValue>({
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
-                  <TableHead key={header.id}>
+                  <TableHead key={header.id} className='text-center'>
                     {header.isPlaceholder ? null : (
                       <div
                         className={
                           header.column.getCanSort()
-                            ? 'flex items-center gap-1 cursor-pointer select-none'
+                            ? 'flex items-center justify-center gap-1 cursor-pointer select-none'
                             : ''
                         }
                         onClick={header.column.getToggleSortingHandler()}
@@ -147,7 +147,7 @@ export function CustomReactTable<TData, TValue>({
                   data-state={row.getIsSelected() && 'selected'}
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
+                    <TableCell key={cell.id} className='text-center'> 
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()

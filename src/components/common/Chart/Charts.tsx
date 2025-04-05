@@ -715,7 +715,7 @@ export const EcgChart: React.FC<{
     <div className="bg-[#fff8f8] relative">
       {/* ECG Grid background */}
       <div className="absolute inset-0 z-0">
-        <svg width="100%" height="120%" className="absolute inset-0">
+        <svg width="100%" height="90%" className="absolute inset-0">
           {/* Horizontal grid lines */}
           {Array.from({ length: smallBoxes + 1 }).map((_, i) => {
             const y = (i * 100) / smallBoxes;
@@ -789,6 +789,99 @@ export const EcgChart: React.FC<{
     </div>
   );
 };
+
+
+
+// TODO: // ECG Chart Component -> SQUARISH 
+// export const EcgChart: React.FC<{
+//   data: any[];
+//   vitalInfo: { title: string; unit?: string };
+// }> = ({ data, vitalInfo }) => {
+//   // Define number of small boxes
+//   const smallBoxesX = 125; // 5 seconds / 0.04 seconds per small box
+//   const smallBoxesY = 14;  // 1.4 units / 0.1 units per small box
+
+//   // Calculate aspect ratio: width / height = smallBoxesX / smallBoxesY
+//   const aspectRatio = smallBoxesX / smallBoxesY; // 125 / 14 ≈ 8.9286
+
+//   return (
+//     <div className="bg-white relative">
+//       {/* ECG Grid background */}
+//       <div className="absolute inset-0 z-0">
+//         <svg width="100%" height="100%" className="absolute inset-0">
+//           {/* Horizontal grid lines (for amplitude) */}
+//           {Array.from({ length: smallBoxesY + 1 }).map((_, i) => {
+//             const y = (i * 100) / smallBoxesY;
+//             const isThick = i % 5 === 0;
+//             return (
+//               <line
+//                 key={`h-${i}`}
+//                 x1="0"
+//                 y1={`${y}%`}
+//                 x2="100%"
+//                 y2={`${y}%`}
+//                 stroke={isThick ? chartColors.gridHighlight : chartColors.grid}
+//                 strokeWidth={isThick ? 1.4 : 1}
+//               />
+//             );
+//           })}
+//           {/* Vertical grid lines (for time) */}
+//           {Array.from({ length: smallBoxesX + 1 }).map((_, i) => {
+//             const x = (i * 100) / smallBoxesX;
+//             const isThick = i % 5 === 0;
+//             return (
+//               <line
+//                 key={`v-${i}`}
+//                 x1={`${x}%`}
+//                 y1="0"
+//                 x2={`${x}%`}
+//                 y2="100%"
+//                 stroke={isThick ? chartColors.gridHighlight : chartColors.grid}
+//                 strokeWidth={isThick ? 1.4 : 1}
+                
+//               />
+//             );
+//           })}
+//         </svg>
+//       </div>
+
+//       {/* ECG Waveform */}
+//       <div className="relative z-10">
+//         <ResponsiveContainer width="100%" aspect={aspectRatio}>
+//           <LineChart
+//             data={data}
+//             margin={{ top: 20, right: 20, left: 10, bottom: 0 }}
+//           >
+//             <XAxis dataKey="time" hide />
+//             <YAxis domain={[-0.3, 1.1]} hide />
+//             <Tooltip
+//               formatter={(value) => [
+//                 `${typeof value === 'number' ? value.toFixed(2) : value} ${vitalInfo.unit || ''}`,
+//                 vitalInfo.title,
+//               ]}
+//               labelFormatter={(label) => `Time ${label}`}
+//             />
+//             <Line
+//               type="monotone"
+//               dataKey="value"
+//               stroke={chartColors.ecgLine}
+//               strokeWidth={2}
+//               dot={false}
+//               isAnimationActive={true}
+//             />
+//           </LineChart>
+//         </ResponsiveContainer>
+//       </div>
+
+//       {/* Time indicators at the bottom */}
+//       <div className="flex justify-between text-sm text-gray-800">
+//         {Array.from({ length: 6 }).map((_, i) => (
+//           <div key={`time-${i}`}>{i}s</div>
+//         ))}
+//       </div>
+//     </div>
+//   );
+// };
 
 
 export const AreaVitalChart: React.FC<ChartProps> = ({ data, vitalType, timeRange, vitalInfo }) => {

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import CustomReactTable from '@/components/common/CustomReactTable/CustomReactTable';
 import { ColumnDef } from '@tanstack/react-table';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Bell, Search } from 'lucide-react';
 import { Input } from '@/components/ui/Input';
@@ -72,11 +71,6 @@ const columns: ColumnDef<Patient>[] = [
     cell: ({ row }) => {
       const patient = row.original;
       return (
-        <div className="flex items-center gap-3">
-          <Avatar className="h-10 w-10">
-            <AvatarImage src={patient.avatar} alt={patient.name} />
-            <AvatarFallback>{patient.name.charAt(0)}</AvatarFallback>
-          </Avatar>
           <div>
             <div className="font-semibold">{patient.name}</div>
             <div className="text-sm text-muted-foreground">
@@ -86,7 +80,6 @@ const columns: ColumnDef<Patient>[] = [
               Patient ID: #{patient.id}
             </div>
           </div>
-        </div>
       );
     },
     enableSorting: true,
@@ -497,10 +490,10 @@ export function PatientsTableExample() {
   const [globalFilter, setGlobalFilter] = useState('');
 
   return (
-    <div className="container mx-auto py-10">
+    <div className="container mx-auto py-6">
       {/* Header Section with flex container */}
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-3xl font-semibold">Patient Panel</h2>
+      <div className="flex items-center justify-between mb-4">
+        <h1 className="text-2xl font-semibold">Patient Panel</h1>
 
         <div className="relative w-full max-w-sm flex px-[14px] py-[10px] items-center gap-2 rounded-[40px] border border-[#DCE3E8] bg-[#F2F5F7] shadow-[0px_1px_2px_rgba(16,24,40,0.05)]">
           <img src={SearchIcon} alt="search" className="w-4 h-4 text-muted-foreground" />
